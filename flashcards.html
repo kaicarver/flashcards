@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Flashcards</title>
+<style>
+table {
+	border-collapse: collapse;
+	background-color: white;
+        margin: 0 auto; /* to center table in page */
+}
+td {
+	border-width: 1px;
+	padding: 0.5em;
+	border-style: dashed;
+	border-color: black;
+	background-color: white;
+
+        width: 15em;
+        height: 100px;
+        text-align: center;
+}
+/* to avoid splitting a line of cells across pages */
+table { page-break-inside:auto }
+tr    { page-break-inside:avoid; page-break-after:auto }
+.char { font-size: 2em; }
+.pinyin { color: black; padding: 5px; font-family: Arial; }
+.english { font-size: 0.8em; font-style: italic; color: black; font-family: Arial; }
+</style>
+<script src="new_practical_chinese_characters.js"></script>
+<script>
+function display_cards() {
+  var charside = false;
+  //charside = true;
+  var perline = 3;
+  var html = "";
+  var count = 0;
+  var line = [];
+  var ignore = "[simplified]";
+  //ignore = "[traditional]";
+  html += "<table>\n";
+  for (i=0; i<words.length; i++) {
+    if (words[i].tradsimp == ignore) { continue; }
+    if (count%perline == 0) { line = []; }
+    if (charside) {
+      line.push('<td><div class="char">' + words[i].char + '</div></td>');
+    } else {
+      var english = words[i].english.replace(/\n/g, "<br>");
+      line.push('<td><div class="pinyin">' + words[i].pinyin + '</div>' +
+                    '<div class="english">' + english + '</div></td>');
+    }
+    if (count % perline == perline-1) {
+      if (charside) { line = line.reverse(); }
+      html += "<tr>\n" + line.join("\n") + "</tr>\n";
+    }
+    count++;
+  }
+  html += "</table>";
+  document.write(html);
+}
+
+display_cards();
+</script>
+</head>
+<body>
+
+</body>
+</html>
