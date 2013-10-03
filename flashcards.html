@@ -31,6 +31,10 @@ tr    { page-break-inside:avoid; page-break-after:auto; }
 }
 .pinyin { color: black; padding: 5px; font-family: Arial; }
 .english { font-size: 0.8em; font-style: italic; color: black; font-family: Arial; }
+#controls { position: absolute; top: 5px; left: 5px; }
+@media print {
+  #controls { display: none; }
+}
 </style>
 <script src="new_practical_chinese_characters.js"></script>
 <script>
@@ -59,14 +63,18 @@ function display_cards(charside) {
     count++;
   }
   html += "</table>";
-  document.write(html);
+  document.getElementById("cards").innerHTML = html;
 }
 
-display_cards(false);
-display_cards(true);
 </script>
 </head>
-<body>
-
+<body onload="display_cards(false)">
+<div id="controls">
+Flashcards: first print one side, then the other.<br>
+<button onclick="display_cards(false)">side 1</button>
+<button onclick="display_cards(true)">side 2</button>
+</div>
+<div id="cards">
+</div>
 </body>
 </html>
