@@ -21,17 +21,20 @@ td {
         text-align: center;
 }
 /* to avoid splitting a line of cells across pages */
-table { page-break-inside:auto }
-tr    { page-break-inside:avoid; page-break-after:auto }
+table { page-break-inside:auto; page-break-after:always; }
+tr    { page-break-inside:avoid; page-break-after:auto; }
 .char { font-size: 2em; }
+.char {
+  transform:  rotate(180deg);
+  -ms-transform:rotate(180deg); /* IE 9 */
+  -webkit-transform:rotate(180deg); /* Safari and Chrome */
+}
 .pinyin { color: black; padding: 5px; font-family: Arial; }
 .english { font-size: 0.8em; font-style: italic; color: black; font-family: Arial; }
 </style>
 <script src="new_practical_chinese_characters.js"></script>
 <script>
-function display_cards() {
-  var charside = false;
-  //charside = true;
+function display_cards(charside) {
   var perline = 3;
   var html = "";
   var count = 0;
@@ -59,7 +62,8 @@ function display_cards() {
   document.write(html);
 }
 
-display_cards();
+display_cards(false);
+display_cards(true);
 </script>
 </head>
 <body>
