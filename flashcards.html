@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Flashcards</title>
 <style>
+#controls { font-size: 0.6em; }
 table {
 	border-collapse: collapse;
 	background-color: white;
@@ -21,6 +22,9 @@ td {
         height: 3cm;
         text-align: center;
 }
+.noborders td { border-color: white; }
+.borders td { border-color: black; }
+
 /* to avoid splitting a line of cells across pages */
 table { page-break-inside:auto; page-break-after:always; }
 tr    { page-break-inside:avoid; page-break-after:auto; }
@@ -66,14 +70,40 @@ function display_cards(charside) {
   html += "</table>";
   document.getElementById("cards").innerHTML = html;
 }
-
+function disp(obj) {
+  console.log(obj.id);
+  switch (obj.id) {
+    case "side1":
+      display_cards(false); break;
+    case "side2":
+      display_cards(true); break;
+    case "borders":
+      if (obj.checked) document.body.className = "borders"
+      else document.body.className = "noborders"
+      console.log(obj.checked);
+      break;
+  }      
+}
+function init() {
+  display_cards(false);
+  document.getElementById('side1').checked = true;
+  document.getElementById('borders').checked = false;
+}
 </script>
 </head>
-<body onload="display_cards(false)">
+<body class="noborders" onload="init()">
 <div id="controls">
-Flashcards: first print one side, then the other.<br>
-<button onclick="display_cards(false)">side 1</button>
-<button onclick="display_cards(true)">side 2</button>
+Flashcards:<br>
+first print one side, then the other.<br>
+Side:
+<input type="radio" id="side1" name="side" onclick="disp(this)" checked/>
+<label for="side1">1</label>
+<input type="radio" id="side2" name="side" onclick="disp(this)"/>
+<label for="side2">2</label>
+<br>
+You may want to print one page with borders as a guide.<br>
+<input type="checkbox" id="borders" onclick="disp(this)" checked/>
+<label for="borders">Borders</label>
 </div>
 <div id="cards">
 </div>
