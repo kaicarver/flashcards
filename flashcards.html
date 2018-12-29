@@ -41,7 +41,7 @@ tr    { page-break-inside:avoid; page-break-after:auto; }
   #controls { display: none; }
 }
 </style>
-<script src="new_practical_chinese_characters.js"></script>
+<script src="Learn-Hiragana1-2.js"></script>
 <script>
 function display_cards(charside) {
   var perline = 3;
@@ -58,7 +58,10 @@ function display_cards(charside) {
       line.push('<td><div class="char">' + words[i].char + '</div></td>');
     } else {
       var english = words[i].english.replace(/\n/g, "<br>");
-      line.push('<td><div class="pinyin">' + words[i].pinyin + '</div>' +
+      var pinyin = words[i].pinyin;
+      english = english == "" ? "&nbsp;" : english;
+      pinyin = pinyin == "" ? "&nbsp;" : pinyin;
+      line.push('<td><div class="pinyin">' + pinyin + '</div>' +
                     '<div class="english">' + english + '</div></td>');
     }
     if (count % perline == perline-1) {
@@ -103,7 +106,9 @@ Side:
 <br>
 You may want to print one page with borders as a guide.<br>
 <input type="checkbox" id="borders" onclick="disp(this)" checked/>
-<label for="borders">Borders</label>
+<label for="borders">Borders</label><br>
+<a href="https://youtu.be/bjp3sguJ88Q">Skritter video inspiring these cards</a><br>
+<a href="https://www.quora.com/How-can-I-memorize-hiragana-and-katakana">more <i>kana</i> learning tips</a><br>
 </div>
 <div id="cards">
 </div>
